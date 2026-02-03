@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 class TextType(Enum):
@@ -8,6 +9,7 @@ class TextType(Enum):
   LINK = "link"
   IMAGE = "img"
 
+@dataclass
 class TextNode():
   def __init__(self, text, text_type, url = None):
     self.text = text
