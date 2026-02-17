@@ -20,6 +20,12 @@ class TestExtractMarkdownImages(unittest.TestCase):
         """
         images_found = extract_markdown_images(md_sample)
         self.assertEqual(images_found, [('image alt text', 'https://img.cdn.com/asdasd/123'), ('second img', 'https://img.cdn.com/asdasd/234')])
+
+    def test_another_case_image_extraction(self):
+        md_sample = "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)"
+        
+        images_found = extract_markdown_images(md_sample)
+        self.assertEqual(images_found, [("image", "https://i.imgur.com/zjjcJKZ.png"),("second image", "https://i.imgur.com/3elNhQu.png")])
         
 class TestExtractMarkdownLinks(unittest.TestCase):
     def test_md_link_extraction_empty(self):
