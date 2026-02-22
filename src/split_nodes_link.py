@@ -1,7 +1,7 @@
-from extraction import extract_markdown_images
+from extraction import extract_markdown_links
 from textnode import TextNode, TextType
 
-def split_nodes_image(old_nodes):
+def split_nodes_link(old_nodes):
     new_nodes = []
 
     for node in old_nodes:
@@ -11,12 +11,12 @@ def split_nodes_image(old_nodes):
 
         node.text = node.text
 
-        images = extract_markdown_images(node.text)
+        images = extract_markdown_links(node.text)
         img_positions = []
         
         for image in images:
             alt_text, url= image
-            img_tag = f"![{alt_text}]({url})"
+            img_tag = f"[{alt_text}]({url})"
             # TODO: This will need to be crosschecked with already catalogued positions
             start_pos = node.text.find(img_tag) 
             end_pos = start_pos + len(img_tag)
@@ -42,7 +42,7 @@ def split_nodes_image(old_nodes):
                 next_img_start_pos, end, image  = next_img_position
                 alt_text, url = image
                 new_nodes.append(TextNode(node.text[cursor_pos:next_img_start_pos], TextType.TEXT))
-                new_nodes.append(TextNode(alt_text,TextType.IMAGE, url))
+                new_nodes.append(TextNode(alt_text,TextType.LINK, url))
                 cursor_pos = end
             
     
