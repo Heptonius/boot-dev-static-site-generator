@@ -4,7 +4,7 @@ from split_nodes_image import split_nodes_image
 from textnode import TextNode, TextType
 
 
-class TestExtractMarkdownImages(unittest.TestCase):
+class TestSplitMarkdownImages(unittest.TestCase):
     def test_empty_case(self):
         no_nodes = []
         result = split_nodes_image(no_nodes)
